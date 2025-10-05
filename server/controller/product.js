@@ -2,14 +2,9 @@ import Product from "../models/product.js";
 
 export const addProduct = async (req, res) => {
   try {
-    // const { name, price, quantity } = req.body;
-    // const newProduct = new Product({ name, price, quantity });
-    // await newProduct.save();
-    // res.status(201).json({ status: true, message: "Product added successfully", product: newProduct });
-    // or simply
-    const body = req.body;
-    const product = await Product.create(body);
-    console.log("product", product);
+
+    const { name, price, quantity, itemId } = req.body;
+    const product = await Product.create({ name, price, quantity, itemId });
     res
       .status(201)
       .json({ status: true, message: "Product added successfully", product });
@@ -90,7 +85,7 @@ export const updateProduct = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Failed to update product", error: error.message });
+      .json({ status:false, message: "Failed to update product", error: error.message });
   }
 };
 

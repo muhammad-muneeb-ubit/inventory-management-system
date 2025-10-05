@@ -1,4 +1,6 @@
 import User from "../models/user.js";
+import { approvalEmailTemplate, rejectionEmailTemplate } from "../utils/emailTemplates.js";
+import { sendEmail } from "../utils/sendEmail.js";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -63,11 +65,19 @@ export const approveRequest = async (req, res) => {
     }
     user.status = "approved";
     await user.save();
+
+     await sendEmail({
+      to: user.email,
+      subject: "✅ Your Hydra Foods Account Has Been Approved",
+      html: approvalEmailTemplate(user.name),
+    });
+
     res.status(200).json({
-      message: "User account approved successfully",
+      message: "User approved successfully, email sent",
       status: true,
       user,
     });
+
   } catch (error) {
     res.status(500).json({
       message: error.message || "something went wrong!",
@@ -109,11 +119,19 @@ export const rejectRequest = async (req, res) => {
     }
     user.status = "rejected";
     await user.save();
+
+    await sendEmail({
+      to: user.email,
+      subject: "❌ Hydra Foods Account Request Rejected",
+      html: rejectionEmailTemplate(user.name),
+    });
+
     res.status(200).json({
-      message: "User account rejected successfully",
+      message: "User rejected successfully, email sent",
       status: true,
       user,
     });
+
   } catch (error) {
     res.status(500).json({
       message: error.message || "something went wrong!",
@@ -160,3 +178,17 @@ export const getPendingUsers = async (req, res) => {
     res.status(500).json({ status: false, message: error.message });
   }
 };
+
+export const changeRole = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ status: false, message: "User not found" });
+        }
+        user.role = user.role === "admin" ? "user" : "admin";
+        await user.save();
+        res.status(200).json({ status: true, message: "User role updated successfully", user });
+    } catch (error) {
+        res.status(500).json({ status: false, message: error.message });
+    }
+}

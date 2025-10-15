@@ -4,8 +4,8 @@ import { authMiddleware, authorizeRoles } from "../midddleware/auth.js";
 
 const reportRouter = express.Router();
 
-router.use(authMiddleware);
-router.use(authorizeRoles("admin"));
+reportRouter.use(authMiddleware);
+reportRouter.use(authorizeRoles("admin"));
 
 reportRouter.get("/report/stock", generateStockReport);
 

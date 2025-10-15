@@ -1,0 +1,85 @@
+- role based (middleware) & testing ✅ 
+- add created at in report ✅
+- notification & email✅
+	- approval✅
+	- rejected✅
+	- user signup wait for appproval✅
+-APIs
+	- role change to admin ✅
+	- password reset
+- frontend ❎
+- input validation✅
+- pagination
+
+
+				***FrontEnd***
+
+- sidebar & Footer (should apply on all pages)(names are not showing on mobile screen)
+- header
+- product
+	- CRUD --> Footer
+- user management
+	- CRUD --> Footer
+- report
+- user profile
+- logout / signout
+- save user object on global state (redux toolkit)
+- test complete ui on mobile 
+
+				***APIs***
+
+ POST /api/auth/signup		Register a new user 	(role: user, status: pending) Public
+ POST /api/auth/login 		Login user/admin → returns JWT token Public
+ POST /api/auth/logout 		Logout user → clear token/cookie Logged-in users
+ GET /api/single/:id		Get single user info 
+ GET /api/users/pending 	List of pending users Admin
+ PATCH /api/users/approve/:id 	Approve a user account Admin
+ PATCH /api/users/reject/:id 	Reject or deactivate a user Admin
+ DELETE /api/users/:id/		Delete a user
+ GET /api/products 		Get all products Approved user + Admin
+ GET /api/products/:id 		Get single product by ID Approved user + Admin
+ GET /api/pending		all oending users
+ POST /api/products 		Add a new product Approved user + Admin
+ PUT /api/products/:id 		Update product info Approved user + Admin
+ DELETE /api/products/:id	 Delete a product Approved user + Admin
+ GET /api/reports/stock 	Generate or download product stock report Admin + Approved user
+ GET /api/users			List all users (approved + pending + rejected) Admin
+ PUT /api/users/:id/role 	Change user role (e.g. user → supervisor) Admin
+
+				***FOR TESTING***
+
+admin = _id 68e172a819c874bb266fa44b
+	name "System Admin"
+	email "admin@hydrafoods.com"
+	password "$2b$10$P/L9rdoW11H.D6qCe95UYut4wdL.PcANmlVnN/JamAHFxCcIehiHC"
+	role "admin"
+	status "approved"
+	createdAt 2025-10-04T19:16:56.266+00:00
+	updatedAt 2025-10-04T19:16:56.266+00:00
+	__v 0
+	token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTE3MmE4MTljODc0YmIyNjZmYTQ0YiIsInJvbGUiOiJhZG1pbiIsInN0YXR1cyI6ImFwcHJvdmVkIiwiaWF0IjoxN
+	      zYwNDQxMzkzLCJleHAiOjE3NjA1Mjc3OTN9.YjP3pWz9R9ZOAKTIC9m7PFrhBZ-9daNYHnx0n1IC8zY
+
+approved = _id 68e18573c086c0ad08fba9b7
+	name "muneeb"
+	email "muneeb@gmail.com"
+	password "$2b$10$qfxjutTv5p0wp3BkQWp4zOPVRzp7rIWnpUiVVBKX7M6Ix9.wiCkpq"
+	role "user"
+	status "approved"
+	createdAt 2025-10-04T20:37:07.358+00:00
+	updatedAt 2025-10-05T13:55:46.004+00:00
+	token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTE4NTczYzA4NmMwYWQwOGZiYTliNyIsInJvbGUiOiJ1c2VyIiwic3RhdHVzIjoiYXBwcm92ZWQ
+		iLCJpYXQiOjE3NjA0NDA4NTcsImV4cCI6MTc2MDUyNzI1N30.t1cddBgpicvHlBWVYk2HLw-9pnT8OAF4SLh9OLv_ioA
+	__v 0
+
+pending =_id 68e2b4565589955fe0bc928f
+	name "Muhammad Muneeb"
+	email "official.muneeb123.developer@gmail.com"
+	password "$2b$10$2vDVL3N5ACEXbxQFzBorzOtyrGM1ftMmRXkkQeWoQavEkfQFADWd6"
+	role "user"
+	status "pending"
+	createdAt 2025-10-05T18:09:27.007+00:00
+	updatedAt 2025-10-05T18:09:27.007+00:00
+	__v 0
+	token yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTJiNDU2NTU4OTk1NWZlMGJjOTI4ZiIsInJvbGUiOiJ1c2VyIiwic3RhdHVzIjoicGV
+		uZGluZyIsImlhdCI6MTc2MDQ0MTI1OSwiZXhwIjoxNzYwNTI3NjU5fQ.A6IsvWFnIlttRmvaj6jeWCmESGEU9RRHpj7LJUrsA0c

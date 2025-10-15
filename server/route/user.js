@@ -13,8 +13,8 @@ import { authMiddleware, authorizeRoles } from "../midddleware/auth.js";
 
 const userRouter = express.Router();
 
-router.use(authMiddleware);
-router.use(authorizeRoles("admin")); // only admin can access
+userRouter.use(authMiddleware);
+userRouter.use(authorizeRoles("admin")); // only admin can access
 
 userRouter.get("/", getAllUsers);
 userRouter.get("/single/:id", getSingleUser);
@@ -26,3 +26,4 @@ userRouter.get("/pending", getPendingUsers);
 userRouter.get("/change-role/:id", changeRole)
 
 export default userRouter;
+ 

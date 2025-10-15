@@ -5,8 +5,8 @@ import { authMiddleware, checkApprovedStatus } from '../midddleware/auth.js';
 const productRouter = express.Router();
 
 
-router.use(authMiddleware); // must be logged in
-router.use(checkApprovedStatus); // must be approved
+productRouter.use(authMiddleware); // must be logged in
+productRouter.use(checkApprovedStatus); // must be approved
 
 productRouter.post("/", addProduct)
 productRouter.get("/", getAllProducts)
